@@ -67,7 +67,7 @@ class CastController extends Controller
             'bio' => 'nullable|string',
         ]);
         $cast->update($request->all());
-        return redirect()->route('casts.index')->with('success', 'Cast updated successfully');
+        return redirect()->route('cast.index')->with('success', 'Cast updated successfully');
     }
 
     /**

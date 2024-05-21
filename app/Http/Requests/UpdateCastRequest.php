@@ -11,7 +11,7 @@ class UpdateCastRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateCastRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama'  => 'required|min:3',
+            'umur'  => 'required|min:10|numeric',
+            'bio'   => 'required|min:15',
         ];
     }
 }
