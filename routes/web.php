@@ -24,3 +24,5 @@ Route::controller(CastController::class)->group(function () {
     // proses menghapus data
     Route::delete('/cast/{cast}', 'delete')->name('cast.delete');
 });
+
+Route::resource('cast', CastController::class);
