@@ -1,5 +1,7 @@
 @extends('template.master')
 
+@section('title','AdminLTE 3 | Add-Data')
+
 @push('css')
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -10,18 +12,19 @@
 @endpush
 
 @section('content')
+@if(Auth::check())
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Validation</h1>
+            <h1>Create Data</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Validation</li>
+              <li class="breadcrumb-item active">Create Data</li>
             </ol>
           </div>
         </div>
@@ -85,7 +88,23 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
+@else
+<div class="content-wrapper">
+  <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Silahkan Login Terlebih Dahulu</h1>
+            </div>
+            <div class="col-sm-6 text-right">
+              <a href="{{ route('user.login') }}" class="btn btn-primary">Login</a>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+  </section>
+</div>
+@endif
 @endsection
 @push('js')
 <!-- jQuery -->

@@ -1,5 +1,7 @@
 @extends('template.master')
 
+@section('title','AdminLTE 3 | Data')
+
 @push('css')
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -56,11 +58,15 @@
                         <td>{{ $value->umur }}</td>
                         <td><form action="{{ route('cast.destroy', $value->id) }}" method="post">
                             <a href="{{ route('cast.show', $value->id) }}" class="btn btn-sm btn-info">Detail</a>
+                            @if(Auth::check())
+                            @can('isAdmin')
                             <a href="{{ route('cast.edit', $value->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         @csrf
                         @method('DELETE')
                               <input type="submit" class="btn btn-sm btn-danger my-1" value="Delete">
+                              @endcan
                             </form>
+                            @endif
                       </tr>
                     @empty
                       <tr>
