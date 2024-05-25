@@ -79,20 +79,20 @@
     </section>
 </div>
 @else
-<div class="content-wrapper">
   <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Silahkan Login Terlebih Dahulu</h1>
-            </div>
-            <div class="col-sm-6 text-right">
-              <a href="{{ route('user.login') }}" class="btn btn-primary">Login</a>
-            </div>
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Silahkan Login Terlebih Dahulu</h4>
+            <p>Anda harus login untuk mengakses halaman ini.</p>
+            <hr>
+            <a href="{{ route('user.login') }}" class="btn btn-primary">Login</a>
           </div>
-        </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </section>
-</div>
 @endif
 @endsection
 @push('js')

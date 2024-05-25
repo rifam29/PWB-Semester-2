@@ -1,7 +1,5 @@
 @extends('template.login')
 
-@section('title','AdminLTE 3 | Form-Login')
-
 @push('css')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -13,7 +11,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Form Login</h1>
+        <h1>Form Register</h1>
       </div>
     </div>
   </div>
@@ -25,11 +23,18 @@
       <div class="col-md-12">
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Silahkan Login Terlebih Dahulu</h3>
+            <h3 class="card-title">Silahkan Buat Akun Terlebih Dahulu</h3>
           </div>
-          <form action="{{ route('user.login.post') }}" method="POST"> <!-- Route for POST login -->
+          <form action="{{ route('auth.store') }}" method="POST"> <!-- Route for POST login -->
             @csrf
             <div class="card-body">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="username" name="username" class="form-control" id="username" placeholder="Input Username">
+                @error('username')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              </div>
               <div class="form-group">
                 <label for="email">Email address</label>
                 <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="{{ old('email') }}">
@@ -44,10 +49,17 @@
                   <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
               </div>
+              <div class="form-group">
+                <label for="role">Role</label>
+                <input type="role" name="role" class="form-control" id="role" placeholder="Your Role">
+                @error('role')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              </div>
             </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-primary">Submit</button><br>
-              <h6>Belum Punya akun?<a href="{{ url('/auth/create') }}">Register </a>dulu yuk!</h6>
+              <h6>Sudah Punya Akun?<a href="{{ route('user.login') }}">Login</a></h6>
             </div>
             @if (session('error'))
               <div class="alert alert-danger">
