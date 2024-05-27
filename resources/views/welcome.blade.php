@@ -71,20 +71,22 @@
     </div>
     <!-- /.content -->
 
-    @else
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0"> SILAHKAN LOGIN TERLEBIH DAHULU</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6 text-right">
-            <a href="{{ route('user.login') }}" class="btn btn-primary btn-fixed-width">Login</a>
+@else
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Silahkan Login Terlebih Dahulu</h4>
+            <p>Anda harus login untuk mengakses halaman ini.</p>
+            <hr>
+            <a href="{{ route('user.login') }}" class="btn btn-primary" style="text-decoration: none;">Login</a>
           </div>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
     </div>
-    @endif
+  </section>
+@endif
     <!-- /.content-header -->
 @endsection
 
