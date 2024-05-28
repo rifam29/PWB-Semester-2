@@ -12,7 +12,6 @@
 @endpush
 
 @section('content')
-@if(Auth::check())
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -78,22 +77,6 @@
       </div>
     </section>
 </div>
-@else
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-12">
-          <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <h4 class="alert-heading">Silahkan Login Terlebih Dahulu</h4>
-            <p>Anda harus login untuk mengakses halaman ini.</p>
-            <hr>
-            <a href="{{ route('user.login') }}" class="btn btn-primary">Login</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-@endif
 @endsection
 @push('js')
 <!-- jQuery -->

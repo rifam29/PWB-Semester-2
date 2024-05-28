@@ -1,4 +1,3 @@
-@if(Auth::check())
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
@@ -74,8 +73,6 @@
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
-      <a href="{{ route('user.logout') }}" class="btn btn-danger text-right">Logout</a>
     </div>
     <!-- /.sidebar -->
   </aside>
-@endif

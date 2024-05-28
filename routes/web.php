@@ -1,17 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CastController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\{
+    CastController,
+    RegisterController,
+    AuthController,
+    DashboardController,
+};
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [UserController::class, 'index'])->name('user.login'); // GET route for login form
-Route::post('/login', [UserController::class, 'login'])->name('user.login.post'); // POST route for login submission
-Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+Route::controller(AuthController::class)->group(function() {
+    Route::get('/login','login')->name('auth.login');
+    Route::post('/authenticate','authenticate')->name('auth.authenticate');
+    Route::post('/logout','logout')->name('auth.logout');
+});
+
+Route::controller(DashboardController::class)->group(function() {
+    Route::get('/dashboard/user','user')->name('dashboard.user');
+    Route::get('/dashboard/admin','admin')->name('dashboard.admin');
+});
+
+Route::controller(RegisterController::class)->group(function(){
+    Route::get('/register', 'create')->name('register.create');
+    Route::post('/register', 'store')->name('register.store');
+});
 
 // Define routes for CastController manually or use Route::resource but not both.
 Route::controller(CastController::class)->group(function () {
@@ -26,17 +41,3 @@ Route::controller(CastController::class)->group(function () {
 
 // Alternatively, use Route::resource for a full set of RESTful routes.
 Route::resource('cast', CastController::class);
-
-// Define routes for AuthController if it has different functionalities from CastController
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/auth', 'index')->name('auth.index');
-    Route::get('/auth/create', 'create')->name('auth.create');
-    Route::post('/auth', 'store')->name('auth.store');
-    Route::get('/auth/{auth}/edit', 'edit')->name('auth.edit');
-    Route::get('/auth/{auth}', 'show')->name('auth.show');
-    Route::put('/auth/{auth}', 'update')->name('auth.update');
-    Route::delete('/auth/{auth}', 'delete')->name('auth.delete');
-});
-
-// Alternatively, use Route::resource for a full set of RESTful routes.
-Route::resource('auth', AuthController::class);

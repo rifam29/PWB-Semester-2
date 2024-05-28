@@ -2,60 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreAuthRequest;
-use App\Http\Requests\UpdateAuthRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function login()
     {
-        $users = User::select('username', 'email', 'password', 'role')->get();
-        return view('auth.login', compact('users'));
-    }
-    public function create()
-    {
-        return view('auth.register');
+        return view("auth.login");
     }
 
-    public function store(StoreAuthRequest $request, User $user)
+    public function authenticate(StoreAuthRequest $request)
     {
-        $user->create($request->all());
-        return redirect()->route('auth.index')->with(['success' => 'Data '.$request['email'].' berhasil disimpan']);
-    }
+        if(Auth::attempt(['email' => $request->email,'password'=> $request->password])) {
+            $request->session()->regenerate();
+            return view('dashboard.user');
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Auth $auth)
-    {
-        //
+        return back()->withErrors([
+            'notif' => 'kredensial tidak valid',
+        ])->onlyInput('email') ;
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Auth $auth)
+    public function logout(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAuthRequest $request, Auth $auth)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Auth $auth)
-    {
-        //
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('auth.login')
+        ->withSuccess('Anda Telah Keluar dari sistem');
     }
 }

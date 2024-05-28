@@ -6,8 +6,6 @@
   <title>@yield('title', 'AdminLTE 3 | Default Title')</title>
   @stack('css')
 </head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
   <!-- Navbar -->
   <!-- /.navbar -->
 
@@ -22,7 +20,6 @@
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
 <!-- ./wrapper -->
 @stack('js')
 </body>

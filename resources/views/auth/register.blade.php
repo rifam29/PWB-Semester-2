@@ -1,81 +1,123 @@
 @extends('template.login')
 
+@section('title','AdminLTE 3 | Registration Page (V2)')
+
 @push('css')
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
-<link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 @endpush
 
 @section('content')
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Form Register</h1>
-      </div>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="#" class="h1"><b>Admin</b>LTE</a>
     </div>
-  </div>
-</section>
-
-<section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Silahkan Buat Akun Terlebih Dahulu</h3>
+    <div class="card-body">
+      <p class="login-box-msg">Register a new membership</p>
+      <form action="{{ route('register.store') }}" method="post">
+        @csrf
+        <div class="row">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Full name" value="{{ @old('name') }}" name="name">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+              @error('name')
+                <span span id="terms-error" class="error invalid-feedback" style="display: inline;">{{ $message }}</span>
+              @enderror
+            </div>
+            <div class="input-group mb-3">
+              <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ @old('email') }}" name="email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+              @error('email')
+              <span span id="terms-error" class="error invalid-feedback" style="display: inline;">{{ $message }}</span>
+            @enderror
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password"  name="password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+              @error('password')
+              <span span id="terms-error" class="error invalid-feedback" style="display: inline;">{{ $message }}</span>
+            @enderror
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Retype password"  name="password_confirmation">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="number" class="form-control @error('age') is-invalid @enderror" placeholder="Age" value="{{ @old('age') }}" name="age">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-calendar"></span>
+                </div>
+              </div>
+              @error('age')
+                <span span id="terms-error" class="error invalid-feedback" style="display: inline;">{{ $message }}</span>
+              @enderror
+            </div>
+            <div class="input-group mb-3">
+              <textarea class="form-control @error('bio') is-invalid @enderror" rows="3" placeholder="Enter Bio" name="bio">{{ @old('bio') }}</textarea>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-info"></span>
+                </div>
+              </div>
+              @error('bio')
+                <span span id="terms-error" class="error invalid-feedback" style="display: inline;">{{ $message }}</span>
+               @enderror
+            </div>
+            <div class="input-group mb-3">
+              <textarea class="form-control @error('alamat') is-invalid @enderror" rows="3" placeholder="Enter alamat" name="alamat">{{ @old('alamat') }}</textarea>
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fa fa-globe"></span>
+                </div>
+              </div>
+              @error('bio')
+                <span span id="terms-error" class="error invalid-feedback" style="display: inline;">{{ $message }}</span>
+               @enderror
+            </div>
           </div>
-          <form action="{{ route('auth.store') }}" method="POST"> <!-- Route for POST login -->
-            @csrf
-            <div class="card-body">
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="username" name="username" class="form-control" id="username" placeholder="Input Username">
-                @error('username')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-              </div>
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="{{ old('email') }}">
-                @error('email')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                @error('password')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-              </div>
-              <div class="form-group">
-                <label for="role">Role</label>
-                <input type="role" name="role" class="form-control" id="role" placeholder="Your Role">
-                @error('role')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-              </div>
-            </div>
-            <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button><br>
-              <h6>Sudah Punya Akun?<a href="{{ route('user.login') }}">Login</a></h6>
-            </div>
-            @if (session('error'))
-              <div class="alert alert-danger">
-                {{ session('error') }}
-              </div>
-            @endif
-          </form>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          <!-- /.col -->
         </div>
-      </div>
+      </form>
+      <a href="{{ route('auth.login') }}" class="text-center">Saya Telah memiliki akun</a>
     </div>
-  </div>
-</section>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
 @endsection
 
 @push('js')
-<script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+    <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- AdminLTE App -->
+    <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+
 @endpush

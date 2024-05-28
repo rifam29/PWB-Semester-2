@@ -19,13 +19,11 @@ class StoreAuthRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required',
-            'role' => 'required',
+            'email'     => 'required|email',
+            'password'     => 'required',
         ];
     }
 }
